@@ -1,47 +1,51 @@
 <script lang="ts">
-  import svelteLogo from './assets/svelte.svg'
-  import viteLogo from '/vite.svg'
-  import Counter from './lib/Counter.svelte'
+  import { onMount } from 'svelte';
+
+  let location: string | null = null;
+  let weather: string | null = null;
+  let temperature: number | null = null;
+
+  const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
+
+  const locationMapping = {
+    'Goteborg, Vastra Gotaland, Sweden': 'Göteborg, Västra Götaland, Sweden',
+    // Will add more mappings for other cities and regions?
+  };
+
+  onMount(async () => {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+
+        const url = `https://weatherapi-com.p.rapidapi.com/current.json?q=${lat},${lon}`;
+        const options = {
+          method: 'GET',
+          headers: {
+            'X-RapidAPI-Key': apiKey,
+            'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com',
+          },
+        };
+
+        fetch(url, options)
+          .then((response) => response.json())
+          .then((data) => {
+            const asciiLocation = `${data.location.name}, ${data.location.region}, ${data.location.country}`;
+            location = locationMapping[asciiLocation] || asciiLocation;
+            weather = data.current.condition.text;
+            temperature = data.current.temp_c;
+          })
+          .catch((error) => console.error('Error:', error));
+      });
+    } else {
+      console.log('Geolocation is not supported by this browser.');
+    }
+  });
 </script>
 
 <main>
-  <div>
-    <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-      <img src={viteLogo} class="logo" alt="Vite Logo" />
-    </a>
-    <a href="https://svelte.dev" target="_blank" rel="noreferrer">
-      <img src={svelteLogo} class="logo svelte" alt="Svelte Logo" />
-    </a>
-  </div>
-  <h1>Vite + Svelte</h1>
-
-  <div class="card">
-    <Counter />
-  </div>
-
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme" target="_blank" rel="noreferrer">SvelteKit</a>, the official Svelte app framework powered by Vite!
-  </p>
-
-  <p class="read-the-docs">
-    Click on the Vite and Svelte logos to learn more
-  </p>
+  <h1>Weather App</h1>
+  <h2>Location: {location}</h2>
+  <h2>Weather: {weather}</h2>
+  <h2>Temperature: {temperature}°C</h2>
 </main>
-
-<style>
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
-  }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-  }
-  .logo.svelte:hover {
-    filter: drop-shadow(0 0 2em #ff3e00aa);
-  }
-  .read-the-docs {
-    color: #888;
-  }
-</style>
