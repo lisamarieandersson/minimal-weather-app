@@ -4,13 +4,9 @@
   let location: string = 'Loading...';
   let weather: string = 'Loading...';
   let temperature: string = 'Loading...';
+  let feelsLike: string = 'Loading...';
 
   const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
-
-  const locationMapping = {
-    'Goteborg, Vastra Gotaland, Sweden': 'Göteborg, Västra Götaland, Sweden',
-    // Will add more mappings for other cities and regions?
-  };
 
   let weatherPromise: Promise<void> | null = null;
 
@@ -32,10 +28,10 @@
         weatherPromise = fetch(url, options)
           .then((response) => response.json())
           .then((data) => {
-            const asciiLocation = `${data.location.name}, ${data.location.region}, ${data.location.country}`;
-            location = locationMapping[asciiLocation] || asciiLocation;
+            location = `${data.location.name}, ${data.location.country}`;
             weather = data.current.condition.text;
             temperature = `${data.current.temp_c}°C`;
+            feelsLike = `${data.current.feelslike_c}°C`;
           });
       });
     } else {
@@ -52,6 +48,7 @@
     <h2>Location: {location}</h2>
     <h2>Weather: {weather}</h2>
     <h2>Temperature: {temperature}</h2>
+    <h2>Feels Like: {feelsLike}</h2>
   {:catch error}
     <p style="color: red">Error: {error.message}</p>
   {/await}
