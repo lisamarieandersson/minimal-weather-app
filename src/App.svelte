@@ -1,42 +1,58 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onDestroy, onMount } from 'svelte';
+  import { describeWindSpeed } from './weatherUtils';
 
   let location: string = 'Loading...';
   let weather: string = 'Loading...';
   let temperature: string = 'Loading...';
   let feelsLike: string = 'Loading...';
+  let windSpeed: string = 'Loading...';
+  let windDescription: string = 'Loading...';
+  let lastUpdated: string = 'Loading...';
+  let weatherIcon: string = '';
 
   const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
 
   let weatherPromise: Promise<void> | null = null;
 
-  onMount(async () => {
+  // Fetch weather function
+  async function fetchWeather() {
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
         const lat = position.coords.latitude;
         const lon = position.coords.longitude;
 
-        const url = `https://weatherapi-com.p.rapidapi.com/current.json?q=${lat},${lon}`;
-        const options = {
-          method: 'GET',
-          headers: {
-            'X-RapidAPI-Key': apiKey,
-            'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com',
-          },
-        };
+        const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
 
-        weatherPromise = fetch(url, options)
+        weatherPromise = fetch(url)
           .then((response) => response.json())
           .then((data) => {
-            location = `${data.location.name}, ${data.location.country}`;
-            weather = data.current.condition.text;
-            temperature = `${data.current.temp_c}°C`;
-            feelsLike = `${data.current.feelslike_c}°C`;
+            location = `${data.name}, ${data.sys.country}`;
+            weather = `${data.weather[0].description
+              .charAt(0)
+              .toUpperCase()}${data.weather[0].description.slice(1)}`;
+            temperature = `${Math.round(data.main.temp)}°C`;
+            feelsLike = `${Math.round(data.main.feels_like)}°C`;
+            windSpeed = `${Math.round(data.wind.speed)} m/s`;
+            windDescription = describeWindSpeed(data.wind.speed);
+            lastUpdated = new Date(data.dt * 1000).toLocaleString();
+            weatherIcon = `wi wi-owm-${data.weather[0].id}`;
           });
       });
     } else {
       console.log('Geolocation is not supported by this browser.');
     }
+  }
+
+  let intervalId: number;
+
+  onMount(() => {
+    fetchWeather(); // initial fetch
+    intervalId = setInterval(fetchWeather, 900000); // fetch weather data every 15 minutes
+  });
+
+  onDestroy(() => {
+    clearInterval(intervalId); // clean up interval on component unmount
   });
 </script>
 
@@ -45,11 +61,22 @@
   {#await weatherPromise}
     <p>Fetching weather data...</p>
   {:then}
-    <h2>Location: {location}</h2>
-    <h2>Weather: {weather}</h2>
-    <h2>Temperature: {temperature}</h2>
-    <h2>Feels Like: {feelsLike}</h2>
+    <i class={weatherIcon} />
+    <h2>{location}</h2>
+    <h2>{temperature}</h2>
+    <h2>{weather}</h2>
+    <h2>{windDescription}</h2>
+    <h2>Feels like: {feelsLike}</h2>
+    <h2>Wind: {windSpeed}</h2>
+    <h2>Last updated: {lastUpdated}</h2>
   {:catch error}
     <p style="color: red">Error: {error.message}</p>
   {/await}
 </main>
+
+<style>
+  .wi {
+    font-size: 5em;
+    color: #ffffff;
+  }
+</style>
