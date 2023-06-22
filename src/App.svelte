@@ -36,7 +36,16 @@
             windSpeed = `${Math.round(data.wind.speed)} m/s`;
             windDescription = describeWindSpeed(data.wind.speed);
             lastUpdated = new Date(data.dt * 1000).toLocaleString();
-            weatherIcon = `wi wi-owm-${data.weather[0].id}`;
+
+            // Calculate if it's day or night
+            const currentTime = Math.round(new Date().getTime() / 1000);
+            const sunrise = data.sys.sunrise;
+            const sunset = data.sys.sunset;
+            const dayOrNight =
+              currentTime >= sunrise && currentTime < sunset ? 'day' : 'night';
+
+            // Use dayOrNight in the icon class
+            weatherIcon = `wi wi-owm-${dayOrNight}-${data.weather[0].id}`;
           });
       });
     } else {
@@ -48,7 +57,7 @@
 
   onMount(() => {
     fetchWeather(); // initial fetch
-    intervalId = setInterval(fetchWeather, 900000); // fetch weather data every 15 minutes
+    intervalId = setInterval(fetchWeather, 90000); // fetch weather data every 15 minutes
   });
 
   onDestroy(() => {
@@ -76,7 +85,8 @@
 
 <style>
   .wi {
-    font-size: 5em;
-    color: #ffffff;
+    font-size: 6em;
+    color: #464646;
+    -webkit-text-stroke: 5px #dbeff8;
   }
 </style>
