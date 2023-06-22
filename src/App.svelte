@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onDestroy, onMount } from 'svelte';
+  import { iconMapping } from './iconMapping';
   import { describeWindSpeed } from './weatherUtils';
 
   let location: string = 'Loading...';
@@ -37,15 +38,14 @@
             windDescription = describeWindSpeed(data.wind.speed);
             lastUpdated = new Date(data.dt * 1000).toLocaleString();
 
-            // Calculate if it's day or night
-            const currentTime = Math.round(new Date().getTime() / 1000);
-            const sunrise = data.sys.sunrise;
-            const sunset = data.sys.sunset;
-            const dayOrNight =
-              currentTime >= sunrise && currentTime < sunset ? 'day' : 'night';
-
-            // Use dayOrNight in the icon class
-            weatherIcon = `wi wi-owm-${dayOrNight}-${data.weather[0].id}`;
+            let weatherIconClass = iconMapping[data.weather[0].icon];
+            if (!weatherIconClass) {
+              console.warn(
+                `No mapping found for weather code ${data.weather[0].icon}`
+              );
+              weatherIconClass = 'pe-7w-cloud'; // default icon
+            }
+            weatherIcon = weatherIconClass; // assign the class to weatherIcon
           });
       });
     } else {
@@ -84,9 +84,9 @@
 </main>
 
 <style>
-  .wi {
-    font-size: 6em;
-    color: #464646;
-    -webkit-text-stroke: 5px #dbeff8;
+  /* Icon styling */
+  [class^='pe-7w-'] {
+    font-size: 6rem;
+    font-weight: 100;
   }
 </style>
