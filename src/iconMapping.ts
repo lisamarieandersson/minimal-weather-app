@@ -1,4 +1,6 @@
-// iconMapping.ts
+/**
+ * Mappings of font icons so they correspond to Open Weather Maps icon list with weather conditions
+ */
 export const iconMapping = {
   '01d': 'pe-7w-sun', // clear sky (day)
   '01n': 'pe-7w-moon', // clear sky (night)
@@ -12,5 +14,10 @@ export const iconMapping = {
   '09n': 'pe-7w-drizzle-moon', // shower rain / drizzle (night)
   '10d': 'pe-7w-rain-alt', // rain (day)
   '10n': 'pe-7w-rain-alt-moon', // rain (night)
-  // ... continue mapping for all weather codes
+  '11d': 'pe-7w-lightning', // thunderstorm (day)
+  '11n': 'pe-7w-lightning-moon', // thunderstorm (night)
+  '13d': 'pe-7w-snow-alt', // snow (day)
+  '13n': 'pe-7w-snow-alt-moon', // snow (night)
+  '50d': 'pe-7w-fog', // fog / mist (day)
+  '50n': 'ppe-7w-fog-moon', // fog / mist (night)
 };
