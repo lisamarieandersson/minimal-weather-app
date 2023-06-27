@@ -52,7 +52,7 @@
               );
               weatherIconClass = 'pe-7w-cloud'; // default icon
             }
-            weatherIcon = weatherIconClass; // assign the class to weatherIcon
+            weatherIcon = weatherIconClass;
 
             let backgroundImageFile = backgroundMapping[data.weather[0].icon];
             if (backgroundImageFile) {
@@ -92,7 +92,7 @@
   class="flex justify-content-center align-items-center"
   style="background-image: url({backgroundImage})"
 >
-  <div class="weather-info-container" transition:fade>
+  <div class="weather-data-container" transition:fade>
     {#await weatherPromise}
       <p>Fetching weather data...</p>
     {:then}
@@ -108,7 +108,7 @@
       <div class="flex justify-content-center align-items-center">
         <div class="line" />
       </div>
-      <div class="additional-info-container">
+      <div class="additional-data-container">
         <div class="flex row justify-content-space-between">
           <p>Feels like {feelsLike}</p>
           <p>|</p>
@@ -137,21 +137,22 @@
     -o-background-size: cover;
     background-size: cover;
     height: 100vh;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
+    padding: 1rem 0 1rem 0;
   }
 
-  .weather-info-container {
+  .weather-data-container {
     text-align: center;
-    padding: 3rem;
+    padding: 2rem 1.3rem 3rem 1.3rem;
     background: rgba(255, 255, 255, 0.5);
     box-sizing: border-box;
     word-spacing: 0.188rem;
   }
 
-  .additional-info-container {
+  .additional-data-container {
     border: 0.092rem solid #686868;
-    padding: 0.5rem 2.2rem 0.5rem 2.2rem;
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+    box-sizing: border-box;
+    max-width: 18rem;
   }
 
   p {
@@ -162,7 +163,7 @@
     height: 0.15rem;
     background: #464646;
     margin-bottom: 3rem;
-    width: 10rem;
+    width: 10.3rem;
   }
 
   /* Icon styling */
