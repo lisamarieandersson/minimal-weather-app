@@ -14,7 +14,7 @@
   let windDescription: string = 'Loading...';
   let lastUpdated: string = 'Loading...';
   let weatherIcon: string = '';
-  let backgroundImage: string = '/backgrounds/background-5-multi.jpg';
+  let backgroundImage: string = '/backgrounds/background-5-multi.jpg'; // default background image
   let currentTime: Date = new Date();
 
   const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
@@ -43,6 +43,7 @@
             windSpeed = `${Math.round(data.wind.speed)} m/s`;
             windDescription = describeWindSpeed(data.wind.speed);
             lastUpdated = new Date(data.dt * 1000).toLocaleString();
+            lastUpdated = lastUpdated.split(':').splice(0, 2).join(':');
 
             let weatherIconClass = iconMapping[data.weather[0].icon];
             if (!weatherIconClass) {
@@ -87,7 +88,10 @@
   });
 </script>
 
-<main style="background-image: url({backgroundImage})">
+<main
+  class="flex justify-content-center align-items-center"
+  style="background-image: url({backgroundImage})"
+>
   <div class="weather-info-container" transition:fade>
     {#await weatherPromise}
       <p>Fetching weather data...</p>
@@ -98,18 +102,22 @@
         {currentTime.toLocaleTimeString()}
       </p>
       <h2>{location}</h2>
-      <h1>{temperature}</h1>
-      <h3>{weather}</h3>
-      <h4>{windDescription}</h4>
-      <div class="line-container">
+      <h1 class="margin-top-bottom">{temperature}</h1>
+      <h3 class="margin-bottom-0">{weather}</h3>
+      <h4 class="margin-top">{windDescription}</h4>
+      <div class="flex justify-content-center align-items-center">
         <div class="line" />
       </div>
       <div class="additional-info-container">
-        <div class="additional-info-row-1">
-          <p>Feels like {feelsLike} | Humidity {humidity}</p>
+        <div class="flex row justify-content-space-between">
+          <p>Feels like {feelsLike}</p>
+          <p>|</p>
+          <p>Humidity {humidity}</p>
         </div>
-        <div class="additional-info-row-2">
+        <div class="flex justify-content-center">
           <p>Windspeed {windSpeed}</p>
+        </div>
+        <div class="flex justify-content-center">
           <p>Last updated: {lastUpdated}</p>
         </div>
       </div>
@@ -129,17 +137,16 @@
     -o-background-size: cover;
     background-size: cover;
     height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
 
   .weather-info-container {
     text-align: center;
-    padding: 4rem;
-    max-width: 32rem;
+    padding: 3rem;
     background: rgba(255, 255, 255, 0.5);
-    line-height: 1.5;
+    box-sizing: border-box;
+    word-spacing: 0.188rem;
   }
 
   .additional-info-container {
@@ -147,18 +154,8 @@
     padding: 0.5rem 2.2rem 0.5rem 2.2rem;
   }
 
-  .additional-info-row-1 {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    word-spacing: 0.188rem;
-  }
-
-  .line-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  p {
+    margin: 0.3rem;
   }
 
   .line {
@@ -170,7 +167,42 @@
 
   /* Icon styling */
   [class^='pe-7w-'] {
-    font-size: 4rem;
+    font-size: 4.6rem;
     color: #464646;
+  }
+
+  /* Reusable classes */
+
+  .flex {
+    display: flex;
+  }
+
+  .row {
+    flex-direction: row;
+  }
+
+  .justify-content-space-between {
+    justify-content: space-between;
+  }
+
+  .justify-content-center {
+    justify-content: center;
+  }
+
+  .align-items-center {
+    align-items: center;
+  }
+
+  .margin-bottom-0 {
+    margin-bottom: 0;
+  }
+
+  .margin-top {
+    margin-top: 0.5rem;
+  }
+
+  .margin-top-bottom {
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
   }
 </style>
