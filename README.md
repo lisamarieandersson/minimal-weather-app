@@ -1,14 +1,34 @@
 # Minimal Weather App
 
-This is a minimal app that displays the weather based on the users current location. The app is built with Svelte and Typescript. The weather data is fetched through [Open Weather Map](https://openweathermap.org/) API.
+# <img src="./public/clouds-with-pink-sky.png" width="1000rem"/>
 
-## How to build the project:
+## About
+
+This is a minimal app that displays the weather based on the users current location.
+
+The app is built with Svelte and Typescript and the weather data is fetched through [Open Weather Map](https://openweathermap.org/) API.
+
+The weather data automatically updates every 15 minutes. The background images and icons also change according to the given weather conditions.
+
+Link to demo coming soon!
+
+<br>
+
+## How to build the project
 
 Run the following commands in the terminal:
 
-- npm install
-- npm run dev
+- `npm install`
+- `npm run dev`
 
-## In VS Code:
+<br>
 
-- Install **_Svelte for VS Code extension_** to get access to IntelliSense for Svelte
+## In VS Code
+
+- Install the extension **_Svelte for VS Code_** to get access to IntelliSense for Svelte.
+
+<br>
+
+## Credit
+
+The font icons used in the project are part of the [Weather 7 Icon Font Set](https://www.pixeden.com/icon-fonts/weather-7-icon-font-set) from [Pixeden Club](https://www.pixeden.com).
