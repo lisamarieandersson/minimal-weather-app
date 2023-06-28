@@ -68,7 +68,6 @@
 
   async function updateWeather() {
     if ('geolocation' in navigator) {
-      // We return a new promise here
       return new Promise<void>((resolve, reject) => {
         navigator.geolocation.getCurrentPosition(
           async (position) => {
@@ -79,10 +78,10 @@
               const data = await fetchWeather(lat, lon, apiKey);
               const mappedData = mapWeatherData(data);
               weatherData = { ...weatherData, ...mappedData };
-              resolve(); // resolve the promise when the operation is done
+              resolve();
             } catch (error) {
               console.error(error.message);
-              reject(error); // reject the promise when an error occurs
+              reject(error);
             }
           },
           reject,
