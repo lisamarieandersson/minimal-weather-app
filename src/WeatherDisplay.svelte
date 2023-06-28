@@ -93,26 +93,6 @@
       padding-right: 2rem;
     }
 
-    h1 {
-      font-size: 5.125rem;
-    }
-
-    h2 {
-      font-size: 1.625rem;
-    }
-
-    h3 {
-      font-size: 1.25rem;
-    }
-
-    h4 {
-      font-size: 1.125rem;
-    }
-
-    p {
-      font-size: 0.75rem;
-    }
-
     .margin-top-bottom {
       margin-top: 1.5rem;
       margin-bottom: 1.5rem;
