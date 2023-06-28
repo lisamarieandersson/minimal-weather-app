@@ -143,7 +143,7 @@
 
   .weather-data-container {
     text-align: center;
-    padding: 2rem 1.3rem 3rem 1.3rem;
+    padding: 2rem 1.3rem 2.3rem 1.3rem;
     background: rgba(255, 255, 255, 0.5);
     box-sizing: border-box;
     word-spacing: 0.188rem;
@@ -215,5 +215,27 @@
 
   /* Tablet styles (for screens 768px and larger) */
   @media (min-width: 768px) {
+    .weather-data-container {
+      max-width: 28rem;
+      padding: 3rem 4rem 3.3rem 4rem;
+    }
+
+    .additional-weather-data-container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+
+    [class^='pe-7w-'] {
+      padding-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 0.75rem;
+    }
+
+    .margin-top-bottom {
+      margin-top: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
   }
 </style>
