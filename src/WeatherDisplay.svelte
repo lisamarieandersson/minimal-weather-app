@@ -11,38 +11,54 @@
   export let lastUpdated: string;
   export let weatherIcon: string;
   export let currentTime: Date;
+
+  const isWeatherDataLoaded = () =>
+    [
+      location,
+      weather,
+      temperature,
+      feelsLike,
+      humidity,
+      windSpeed,
+      windDescription,
+      lastUpdated,
+      weatherIcon,
+      currentTime,
+    ].every(Boolean);
 </script>
 
-<!-- Weather data display -->
-<div class="weather-data-container" transition:fade>
-  <i class={weatherIcon} />
-  <p>
-    {currentTime.toLocaleDateString()}
-    {currentTime.toLocaleTimeString()}
-  </p>
-  <h2>{location}</h2>
-  <h1 class="margin-top-bottom">{temperature}</h1>
-  <h3 class="margin-bottom-0">{weather}</h3>
-  <h4 class="margin-top">{windDescription}</h4>
-  <div class="flex justify-content-center align-items-center">
-    <div class="line" />
+{#if isWeatherDataLoaded()}
+  <!-- Weather data display -->
+  <div class="weather-data-container" transition:fade>
+    <i class={weatherIcon} />
+    <p>
+      {currentTime.toLocaleDateString()}
+      {currentTime.toLocaleTimeString()}
+    </p>
+    <h2>{location}</h2>
+    <h1 class="margin-top-bottom">{temperature}</h1>
+    <h3 class="margin-bottom-0">{weather}</h3>
+    <h4 class="margin-top">{windDescription}</h4>
+    <div class="flex justify-content-center align-items-center">
+      <div class="line" />
+    </div>
+    <div
+      class="additional-weather-data-container flex column justify-content-center align-items-center"
+    >
+      <div class="flex row justify-content-space-between align-items-center">
+        <p>Feels like {feelsLike}</p>
+        <p>|</p>
+        <p>Humidity {humidity}</p>
+      </div>
+      <div class="flex justify-content-center">
+        <p>Wind speed {windSpeed}</p>
+      </div>
+      <div class="flex justify-content-center">
+        <p>Last updated: {lastUpdated}</p>
+      </div>
+    </div>
   </div>
-  <div
-    class="additional-weather-data-container flex column justify-content-center align-items-center"
-  >
-    <div class="flex row justify-content-space-between align-items-center">
-      <p>Feels like {feelsLike}</p>
-      <p>|</p>
-      <p>Humidity {humidity}</p>
-    </div>
-    <div class="flex justify-content-center">
-      <p>Wind speed {windSpeed}</p>
-    </div>
-    <div class="flex justify-content-center">
-      <p>Last updated: {lastUpdated}</p>
-    </div>
-  </div>
-</div>
+{/if}
 
 <style>
   .weather-data-container {
