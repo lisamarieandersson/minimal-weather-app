@@ -5,14 +5,14 @@
   import { iconMapping } from './iconMapping';
   import { describeWindSpeed } from './weatherUtils';
 
-  let location: string = 'Loading...';
-  let weather: string = 'Loading...';
-  let temperature: string = 'Loading...';
-  let feelsLike: string = 'Loading...';
-  let humidity: string = 'Loading...';
-  let windSpeed: string = 'Loading...';
-  let windDescription: string = 'Loading...';
-  let lastUpdated: string = 'Loading...';
+  let location: string = '...';
+  let weather: string = '...';
+  let temperature: string = '...';
+  let feelsLike: string = '...';
+  let humidity: string = '...';
+  let windSpeed: string = '...';
+  let windDescription: string = '...';
+  let lastUpdated: string = '...';
   let weatherIcon: string = '';
   let backgroundImage: string = '/backgrounds/background-5-multi.jpg'; // default background image
   let currentTime: Date = new Date();
@@ -108,14 +108,16 @@
       <div class="flex justify-content-center align-items-center">
         <div class="line" />
       </div>
-      <div class="additional-data-container">
-        <div class="flex row justify-content-space-between">
+      <div
+        class="additional-weather-data-container flex column justify-content-center align-items-center"
+      >
+        <div class="flex row justify-content-space-between align-items-center">
           <p>Feels like {feelsLike}</p>
           <p>|</p>
           <p>Humidity {humidity}</p>
         </div>
         <div class="flex justify-content-center">
-          <p>Windspeed {windSpeed}</p>
+          <p>Wind speed {windSpeed}</p>
         </div>
         <div class="flex justify-content-center">
           <p>Last updated: {lastUpdated}</p>
@@ -137,7 +139,6 @@
     -o-background-size: cover;
     background-size: cover;
     height: 100vh;
-    padding: 1rem 0 1rem 0;
   }
 
   .weather-data-container {
@@ -146,13 +147,14 @@
     background: rgba(255, 255, 255, 0.5);
     box-sizing: border-box;
     word-spacing: 0.188rem;
+    max-width: 19rem;
+    height: auto;
   }
 
-  .additional-data-container {
+  .additional-weather-data-container {
     border: 0.092rem solid #686868;
-    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+    padding: 0.5rem;
     box-sizing: border-box;
-    max-width: 18rem;
   }
 
   p {
@@ -182,6 +184,10 @@
     flex-direction: row;
   }
 
+  .column {
+    flex-direction: column;
+  }
+
   .justify-content-space-between {
     justify-content: space-between;
   }
@@ -205,5 +211,9 @@
   .margin-top-bottom {
     margin-top: 1.25rem;
     margin-bottom: 1.25rem;
+  }
+
+  /* Tablet styles (for screens 768px and larger) */
+  @media (min-width: 768px) {
   }
 </style>
