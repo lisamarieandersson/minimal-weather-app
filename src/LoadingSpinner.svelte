@@ -1,4 +1,4 @@
-<!-- Spinner -->
+<!-- Loading spinner to give the user feedback that the weather data is being loaded  -->
 
 <div class="loader" />
 
