@@ -1,3 +1,4 @@
+// Interface for the chosen weather data being displayed in the app
 export interface WeatherData {
   name: string;
   sys: {
