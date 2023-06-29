@@ -1,6 +1,4 @@
-/**
- * Describes wind speed based on the Beaufort wind force scale
- */
+// Describes wind speed based on the Beaufort wind force scale
 export function describeWindSpeed(speed: number): string {
   if (speed < 0.3) {
     return 'Calm';
