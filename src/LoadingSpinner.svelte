@@ -1,3 +1,5 @@
+<!-- Spinner -->
+
 <div class="loader" />
 
 <style>
