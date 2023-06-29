@@ -1,5 +1,6 @@
 /**
- * Mappings of background images so they correspond to Open Weather Maps icon list with weather conditions
+ * Mapping to display the chosen background image based
+ * on the weather condition code received from the API
  */
 export const backgroundMapping = {
   '01d': 'background-8-blue.jpg', // clear sky (day)
