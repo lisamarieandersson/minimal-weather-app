@@ -1,5 +1,6 @@
 /**
- * Mappings of font icons so they correspond to Open Weather Maps icon list with weather conditions
+ * Mapping to display the right icon based on the
+ * weather condition code received from the API
  */
 export const iconMapping = {
   '01d': 'pe-7w-sun', // clear sky (day)
