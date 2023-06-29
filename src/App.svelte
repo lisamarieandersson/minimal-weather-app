@@ -5,30 +5,18 @@
   import { backgroundMapping } from './backgroundMapping';
   import { iconMapping } from './iconMapping';
   import { fetchWeather } from './weatherAPI';
+  import { type WeatherData } from './weatherTypes';
   import { describeWindSpeed } from './weatherUtils';
 
-  interface WeatherData {
-    name: string;
-    sys: {
-      country: string;
-    };
-    weather: {
-      description: string;
-      icon: string;
-    }[];
-    main: {
-      temp: number;
-      feels_like: number;
-      humidity: number;
-    };
-    wind: {
-      speed: number;
-    };
-    dt: number;
-  }
+  const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
+  let weatherPromise: Promise<void> | null = null;
+  let weatherIntervalId: number;
+  let timeIntervalId: number;
+
+  let isLoading = true;
+  let currentTime: Date = new Date();
 
   let backgroundImage: string = '/backgrounds/background-5-multi.jpg'; // default background image
-  let currentTime: Date = new Date();
   let weatherData = {
     location: '',
     weather: '',
@@ -40,12 +28,6 @@
     lastUpdated: '',
     weatherIcon: '',
   };
-
-  const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
-
-  let weatherPromise: Promise<void> | null = null;
-  let weatherIntervalId: number;
-  let timeIntervalId: number;
 
   onMount(() => {
     // Fetch the weather initially and every 15 minutes
@@ -66,6 +48,7 @@
     clearInterval(timeIntervalId);
   });
 
+  //  Retrieves the current geolocation data and updates the weather based on the response from the API
   async function updateWeather() {
     if ('geolocation' in navigator) {
       return new Promise<void>((resolve, reject) => {
@@ -78,6 +61,7 @@
               const data = await fetchWeather(lat, lon, apiKey);
               const mappedData = mapWeatherData(data);
               weatherData = { ...weatherData, ...mappedData };
+              isLoading = false;
               resolve();
             } catch (error) {
               console.error(error.message);
@@ -93,6 +77,7 @@
     }
   }
 
+  // Formats and maps the raw weather data from the API according to the structure of the app
   function mapWeatherData(data: WeatherData) {
     let weatherIconClass = iconMapping[data.weather[0].icon] || 'pe-7w-cloud';
     let backgroundImageFile =
@@ -127,7 +112,7 @@
   {#await weatherPromise}
     <div class="loader"><LoadingSpinner /></div>
   {:then}
-    <WeatherDisplay {currentTime} {...weatherData} />
+    <WeatherDisplay {currentTime} {isLoading} {...weatherData} />
   {:catch error}
     <p style="color: red">Error: {error.message}</p>
   {/await}
