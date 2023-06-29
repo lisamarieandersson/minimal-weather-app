@@ -11,23 +11,10 @@
   export let lastUpdated: string;
   export let weatherIcon: string;
   export let currentTime: Date;
-
-  const isWeatherDataLoaded = () =>
-    [
-      location,
-      weather,
-      temperature,
-      feelsLike,
-      humidity,
-      windSpeed,
-      windDescription,
-      lastUpdated,
-      weatherIcon,
-      currentTime,
-    ].every(Boolean);
+  export let isLoading: boolean;
 </script>
 
-{#if isWeatherDataLoaded()}
+{#if !isLoading}
   <!-- Weather data display -->
   <div class="weather-data-container" transition:fade>
     <i class={weatherIcon} />
