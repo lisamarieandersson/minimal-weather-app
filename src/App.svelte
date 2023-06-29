@@ -30,25 +30,29 @@
   };
 
   onMount(() => {
-    // Fetch the weather initially and every 15 minutes
+    // Fetches the weather initially and every 15 minutes
     weatherPromise = updateWeather();
     weatherIntervalId = setInterval(() => {
       weatherPromise = updateWeather();
     }, 900000);
 
-    // Update the time every second
+    // Updates the time every second
     timeIntervalId = setInterval(() => {
       currentTime = new Date();
     }, 1000);
   });
 
   onDestroy(() => {
-    // Clear both intervals on component unmount
+    // Clears both intervals on component unmount
     clearInterval(weatherIntervalId);
     clearInterval(timeIntervalId);
   });
 
-  //  Retrieves the current geolocation data and updates the weather based on the response from the API
+  /**
+   * Retrieves the current geolocation data
+   * Fetches weather information corresponding to that location
+   * Updates the weather based on the response from the API
+   */
   async function updateWeather() {
     if ('geolocation' in navigator) {
       return new Promise<void>((resolve, reject) => {
@@ -105,6 +109,11 @@
   }
 </script>
 
+<!-- 
+  Displays a loading spinner while waiting for the weather data to load
+  Renders the WeatherDisplay component with the fetched data once it's available 
+  Displays an error message if the weather data fetch fails 
+-->
 <main
   class="flex justify-content-center align-items-center"
   style="background-image: url({backgroundImage})"
