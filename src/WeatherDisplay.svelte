@@ -14,8 +14,12 @@
   export let isLoading: boolean;
 </script>
 
+<!-- 
+  Renders the layout for the weather data, weather icon, time and date.
+  This content will only be displayed if the 'isLoading' boolean is false,
+  indicating that the weather data has been successfully fetched 
+-->
 {#if !isLoading}
-  <!-- Weather data display -->
   <div class="weather-data-container" transition:fade>
     <i class={weatherIcon} />
     <p>
