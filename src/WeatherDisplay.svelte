@@ -66,7 +66,7 @@
   }
 
   .additional-weather-data-container {
-    border: 0.092rem solid rgba(104, 104, 104, 1);
+    border: 0.092rem solid rgba(142, 140, 140, 1);
     padding: 0.4rem;
     box-sizing: border-box;
   }
