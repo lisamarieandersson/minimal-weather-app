@@ -6,11 +6,14 @@
 
 This is a minimal app that displays the weather based on the users current location.
 
-The app is built with Svelte and Typescript and the weather data is fetched through [Open Weather Map](https://openweathermap.org/) API.
+The app is built with Svelte and Typescript. The weather data is fetched through [Open Weather Map](https://openweathermap.org/) API.
 
-The weather data automatically updates every 15 minutes. The background images and icons also change according to the given weather conditions.
+The weather is automatically updated every 15 minutes. The background images and icons also change according to the given weather conditions.
 
-Link to demo coming soon!
+<br>
+Demo link to see it and try it out:
+
+[Minimal Weather App](https://minimal-weather-app-design.netlify.app/)
 
 <br>
 
