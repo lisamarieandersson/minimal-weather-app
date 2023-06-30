@@ -52,19 +52,22 @@
 {/if}
 
 <style>
+  /* Styling */
+
+  /* Styles for extra extra small mobile screens ≥280px first */
   .weather-data-container {
     text-align: center;
-    padding: 2rem 1.3rem 2.3rem 1.3rem;
+    padding: 1.7rem 1.2rem 2rem 1.2rem;
     background: rgba(255, 255, 255, 0.5);
     box-sizing: border-box;
     word-spacing: 0.188rem;
-    max-width: 19rem;
+    max-width: 16rem;
     height: auto;
   }
 
   .additional-weather-data-container {
-    border: 0.092rem solid #686868;
-    padding: 0.5rem;
+    border: 0.092rem solid rgba(104, 104, 104, 1);
+    padding: 0.4rem;
     box-sizing: border-box;
   }
 
@@ -83,13 +86,21 @@
   [class^='pe-7w-'] {
     font-size: 4.6rem;
     color: #464646;
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.7rem;
   }
 
   /* Media queries */
 
-  /* Larger than tablet */
-  @media (min-width: 750px) {
+  /* Styles for extra small screens and larger */
+  @media only screen and (min-width: 320px) {
+    .weather-data-container {
+      padding: 2rem 1.2rem 2.3rem 1.2rem;
+      max-width: 19rem;
+    }
+  }
+
+  /* Styles for medium screens and larger */
+  @media only screen and (min-width: 768px) {
     .weather-data-container {
       max-width: 28rem;
       padding: 3rem 4rem 3.3rem 4rem;
