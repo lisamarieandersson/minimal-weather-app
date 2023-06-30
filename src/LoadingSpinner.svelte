@@ -3,6 +3,7 @@
 <div class="loader" />
 
 <style>
+  /* Styling */
   .loader {
     border: 1rem solid #f3f3f3;
     border-radius: 50%;
