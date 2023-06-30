@@ -128,6 +128,7 @@
 </main>
 
 <style>
+  /* Styling */
   main {
     position: relative;
     background-repeat: no-repeat;
@@ -138,6 +139,7 @@
     -o-background-size: cover;
     background-size: cover;
     height: 100vh;
+    overflow-y: scroll;
   }
 
   .loader {
