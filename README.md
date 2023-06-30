@@ -11,7 +11,7 @@ The app is built with Svelte and Typescript. The weather data is fetched through
 The weather is automatically updated every 15 minutes. The background images and icons also change according to the given weather conditions.
 
 <br>
-Demo link to see it and try it out:
+Demo link to see and try it out:
 
 [Minimal Weather App](https://minimal-weather-app-design.netlify.app/)
 
