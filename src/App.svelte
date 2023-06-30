@@ -12,6 +12,7 @@
   let weatherPromise: Promise<void> | null = null;
   let weatherIntervalId: number;
   let timeIntervalId: number;
+  let geolocationError: string | null = null;
 
   let isLoading = true;
   let currentTime: Date = new Date();
@@ -68,16 +69,37 @@
               isLoading = false;
               resolve();
             } catch (error) {
+              geolocationError = `Failed to fetch weather data: ${error.message}`;
               console.error(error.message);
               reject(error);
             }
           },
-          reject,
+          (error) => {
+            switch (error.code) {
+              case error.PERMISSION_DENIED:
+                geolocationError =
+                  'Location access denied by user. Please enable geolocation.';
+                break;
+              case error.POSITION_UNAVAILABLE:
+                geolocationError =
+                  'Location information is unavailable. Please try again.';
+                break;
+              case error.TIMEOUT:
+                geolocationError =
+                  'The request to get user location timed out. Please try again.';
+                break;
+              default:
+                geolocationError =
+                  'An unknown error occurred while trying to fetch location.';
+                break;
+            }
+            reject(error);
+          },
           { timeout: 5000 }
         );
       });
     } else {
-      console.log('Geolocation is not supported by this browser.');
+      geolocationError = 'Geolocation is not supported by this browser.';
     }
   }
 
@@ -109,22 +131,25 @@
   }
 </script>
 
-<!-- 
-  Displays a loading spinner while waiting for the weather data to load
+<!--
+  Checks for geolocation errors and displays an error message to the user if there are any
+  If no geolocation errors, displays a loading spinner while waiting for the weather data to load
   Renders the WeatherDisplay component with the fetched data once it's available 
-  Displays an error message if the weather data fetch fails 
+  Displays an error message if the weather data fetch fails
 -->
 <main
   class="flex justify-content-center align-items-center"
   style="background-image: url({backgroundImage})"
 >
-  {#await weatherPromise}
-    <div class="loader"><LoadingSpinner /></div>
-  {:then}
-    <WeatherDisplay {currentTime} {isLoading} {...weatherData} />
-  {:catch error}
-    <p style="color: red">Error: {error.message}</p>
-  {/await}
+  {#if geolocationError}
+    <p style="color: red">{geolocationError}</p>
+  {:else}
+    {#await weatherPromise}
+      <div class="loader"><LoadingSpinner /></div>
+    {:then}
+      <WeatherDisplay {currentTime} {isLoading} {...weatherData} />
+    {/await}
+  {/if}
 </main>
 
 <style>
