@@ -116,8 +116,8 @@
       weather: `${data.weather[0].description
         .charAt(0)
         .toUpperCase()}${data.weather[0].description.slice(1)}`,
-      temperature: `${Math.round(data.main.temp)}°C`,
-      feelsLike: `${Math.round(data.main.feels_like)}°C`,
+      temperature: `${Math.round(data.main.temp)}`,
+      feelsLike: `${Math.round(data.main.feels_like)}°`,
       humidity: `${data.main.humidity}%`,
       windSpeed: `${Math.round(data.wind.speed)} m/s`,
       windDescription: describeWindSpeed(data.wind.speed),
