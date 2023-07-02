@@ -27,7 +27,9 @@
       {currentTime.toLocaleTimeString()}
     </p>
     <h2>{location}</h2>
-    <h1 class="temperature margin-top-bottom"><span>{temperature}</span></h1>
+    <div class="temperature">
+      <h1 class="margin-top-bottom">{temperature}</h1>
+    </div>
     <h3 class="margin-bottom-0">{weather}</h3>
     <h4 class="margin-top">{windDescription}</h4>
     <div class="flex justify-content-center align-items-center">
@@ -71,15 +73,15 @@
     box-sizing: border-box;
   }
 
-  .temperature span {
+  .temperature h1 {
     position: relative;
     text-align: center;
   }
 
-  .temperature span::after {
+  .temperature h1::after {
     content: '°';
     position: absolute;
-    left: 5.4rem;
+    left: 9.6rem;
   }
 
   p {
@@ -108,6 +110,10 @@
       padding: 2rem 1.2rem 2.3rem 1.2rem;
       max-width: 19rem;
     }
+
+    .temperature h1::after {
+      left: 10.7rem;
+    }
   }
 
   /* Styles for medium screens and larger */
@@ -122,8 +128,8 @@
       padding-right: 2rem;
     }
 
-    .temperature span::after {
-      left: 5.9rem;
+    .temperature h1::after {
+      left: 12.6rem;
     }
 
     .margin-top-bottom {
