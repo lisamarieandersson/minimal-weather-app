@@ -142,7 +142,7 @@
   style="background-image: url({backgroundImage})"
 >
   {#if geolocationError}
-    <p style="color: red">{geolocationError}</p>
+    <p class="error-message">{geolocationError}</p>
   {:else}
     {#await weatherPromise}
       <div class="loader"><LoadingSpinner /></div>
@@ -172,5 +172,13 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+
+  .error-message {
+    color: #ff0000;
+    padding: 1.25rem;
+    text-align: center;
+    max-width: 80%;
+    margin: 0 auto;
   }
 </style>
