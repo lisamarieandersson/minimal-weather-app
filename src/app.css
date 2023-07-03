@@ -17,6 +17,8 @@ h1 {
   font-size: 4.75em;
   line-height: 1.1;
   font-weight: 400;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 h2 {
@@ -77,11 +79,6 @@ p {
 
 .margin-top {
   margin-top: 0.5rem;
-}
-
-.margin-top-bottom {
-  margin-top: 1.25rem;
-  margin-bottom: 1.25rem;
 }
 
 /* Media queries */
