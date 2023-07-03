@@ -95,7 +95,7 @@
             }
             reject(error);
           },
-          { timeout: 5000 }
+          { timeout: 6000 }
         );
       });
     } else {
