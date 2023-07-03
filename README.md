@@ -17,7 +17,7 @@ Demo link to see and try it out:
 
 <br>
 
-## How to build the project
+## How to build and run the project
 
 Run the following commands in the terminal:
 
