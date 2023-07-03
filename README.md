@@ -34,4 +34,6 @@ Run the following commands in the terminal:
 
 ## Credit
 
-The font icons used in the project are part of the [Weather 7 Icon Font Set](https://www.pixeden.com/icon-fonts/weather-7-icon-font-set) from [Pixeden Club](https://www.pixeden.com).
+- The font icons used in the project are from [Pixeden Club](https://www.pixeden.com).
+
+- The backgrounds images are bought with commercial license from [Creative Market](https://creativemarket.com/).
