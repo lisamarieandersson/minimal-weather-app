@@ -17,7 +17,7 @@
   let isLoading = true;
   let currentTime: Date = new Date();
 
-  let backgroundImage: string = '/backgrounds/background-5-multi.jpg'; // default background image
+  let backgroundImage: string = '/backgrounds/background-5-multi.webp'; // default background image
   let weatherData = {
     location: '',
     weather: '',
@@ -95,7 +95,7 @@
             }
             reject(error);
           },
-          { timeout: 6000 }
+          { timeout: 5000 }
         );
       });
     } else {
