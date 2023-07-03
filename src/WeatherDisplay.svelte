@@ -28,7 +28,7 @@
     </p>
     <h2>{location}</h2>
     <div class="temperature">
-      <h1 class="margin-top-bottom">{temperature}</h1>
+      <h1>{temperature}</h1>
     </div>
     <h3 class="margin-bottom-0">{weather}</h3>
     <h4 class="margin-top">{windDescription}</h4>
@@ -73,15 +73,21 @@
     box-sizing: border-box;
   }
 
+  .temperature {
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+
   .temperature h1 {
     position: relative;
     text-align: center;
+    display: inline-block;
   }
 
   .temperature h1::after {
     content: '°';
     position: absolute;
-    left: 9.6rem;
+    right: -1.8rem;
   }
 
   p {
@@ -110,10 +116,6 @@
       padding: 2rem 1.2rem 2.3rem 1.2rem;
       max-width: 19rem;
     }
-
-    .temperature h1::after {
-      left: 10.7rem;
-    }
   }
 
   /* Styles for medium screens and larger */
@@ -128,11 +130,7 @@
       padding-right: 2rem;
     }
 
-    .temperature h1::after {
-      left: 12.6rem;
-    }
-
-    .margin-top-bottom {
+    .temperature {
       margin-top: 1.5rem;
       margin-bottom: 1.5rem;
     }
