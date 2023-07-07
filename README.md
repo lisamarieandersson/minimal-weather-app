@@ -36,4 +36,4 @@ Run the following commands in the terminal:
 
 - The font icons used in the project are from [Pixeden Club](https://www.pixeden.com).
 
-- The backgrounds images are bought with commercial license from [Creative Market](https://creativemarket.com/).
+- The background images are bought with commercial license from [Creative Market](https://creativemarket.com/).
