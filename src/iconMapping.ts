@@ -20,5 +20,5 @@ export const iconMapping = {
   '13d': 'pe-7w-snow-alt', // snow (day)
   '13n': 'pe-7w-snow-alt-moon', // snow (night)
   '50d': 'pe-7w-fog', // atmosphere like mist, fog etc. (day)
-  '50n': 'ppe-7w-fog-moon', // atmosphere like mist, fog etc. (night)
+  '50n': 'pe-7w-fog-moon', // atmosphere like mist, fog etc. (night)
 };
