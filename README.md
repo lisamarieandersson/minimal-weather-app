@@ -21,8 +21,12 @@ Demo link to see and try it out:
 
 Run the following commands in the terminal:
 
-- `npm install`
-- `npm run dev`
+```
+npm install
+```
+```
+npm run dev
+```
 
 <br>
 
